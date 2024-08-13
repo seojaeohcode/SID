@@ -1,5 +1,6 @@
 package com.example.sidapplication;
 
+import androidx.appcompat.app.AppCompatActivity;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
@@ -15,17 +16,16 @@ import androidx.core.app.ActivityCompat;
 import java.util.concurrent.ExecutionException;
 
 public class FaceIdTestActivity extends AppCompatActivity {
-
     PreviewView previewView;
     Button startButton;
     Button stopButton;
-    String TAG = "FaceIdTestActivity";
+    String TAG = "MainActivity";
     ProcessCameraProvider processCameraProvider;
     //int lensFacing = CameraSelector.LENS_FACING_FRONT;
     int lensFacing = CameraSelector.LENS_FACING_BACK;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_testface);
 
@@ -60,21 +60,10 @@ public class FaceIdTestActivity extends AppCompatActivity {
                 processCameraProvider.unbindAll();
             }
         });
-
-        /*
-        Button FaceCheckButton = findViewById(R.id.face_check);
-
-        FaceCheckButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CameraOn();
-            }
-        });*/
     }
 
     void bindPreview() {
-        //previewView.setScaleType(PreviewView.ScaleType.FIT_CENTER);
-        previewView.setScaleType(PreviewView.ScaleType.FILL_CENTER); //cranberryai
+        previewView.setScaleType(PreviewView.ScaleType.FIT_CENTER);
         CameraSelector cameraSelector = new CameraSelector.Builder()
                 .requireLensFacing(lensFacing)
                 .build();
