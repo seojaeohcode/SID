@@ -62,7 +62,7 @@ public class FaceDetectFrameActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (ActivityCompat.checkSelfPermission(FaceDetectFrameActivity.this, android.Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
                     bindPreview();
-                    bindImageAnalysis();
+                    //bindImageAnalysis();
                 }
             }
         });
@@ -73,6 +73,20 @@ public class FaceDetectFrameActivity extends AppCompatActivity {
                 processCameraProvider.unbindAll();
             }
         });
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case 1:
+                if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+                    bindPreview();
+                }
+                else {
+                }
+                break;
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
     void bindPreview() {
@@ -88,6 +102,7 @@ public class FaceDetectFrameActivity extends AppCompatActivity {
         processCameraProvider.bindToLifecycle(this, cameraSelector, preview);
     }
 
+    /*
     void bindImageAnalysis() {
         CameraSelector cameraSelector = new CameraSelector.Builder()
                 .requireLensFacing(lensFacing)
@@ -99,25 +114,9 @@ public class FaceDetectFrameActivity extends AppCompatActivity {
                     @OptIn(markerClass = ExperimentalGetImage.class)
                     @Override
                     public void analyze(@NonNull ImageProxy image) {
-                        /*
-                        @SuppressLint("UnsafeExperimentalUsageError")
-                        Image mediaImage = image.getImage();
-                        */
-                        ///*
                         @SuppressLint("UnsafeExperimentalUsageError")
                         Image mediaImage = image.getImage();
                         Bitmap bitmap = ImageUtil.mediaImageToBitmap(mediaImage);
-                        //*/
-                        /*
-                        @SuppressLint("UnsafeExperimentalUsageError")
-                        Image mediaImage = image.getImage();
-                        byte[] byteArray = ImageUtil.mediaImageToByteArray(mediaImage);
-                        */
-                        /*
-                        @SuppressLint("UnsafeExperimentalUsageError")
-                        Image mediaImage = image.getImage();
-                        ByteBuffer byteBuffer = ImageUtil.mediaImageToByteBuffer(mediaImage);
-                        */
 
                         int rotationDegrees = image.getImageInfo().getRotationDegrees();
                         Log.d(TAG, Float.toString(rotationDegrees)); //90 //0, 90, 180, 90 //이미지를 바르게 하기위해 시계 방향으로 회전해야할 각도
@@ -137,7 +136,7 @@ public class FaceDetectFrameActivity extends AppCompatActivity {
         );
 
         processCameraProvider.bindToLifecycle(this, cameraSelector, imageAnalysis);
-    }
+    }*/
 
     @Override
     protected void onPause() {
