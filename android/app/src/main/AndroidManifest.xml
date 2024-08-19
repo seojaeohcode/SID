@@ -35,7 +35,7 @@
             android:name=".FaceIdTestActivity"
             android:exported="false" />
         <activity
-            android:name=".CameraAcrivity"
+            android:name=".FaceDetectFrameActivity"
             android:exported="false" />
         <activity
             android:name=".SplashActivity"
