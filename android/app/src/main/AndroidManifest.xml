@@ -57,4 +57,11 @@
             android:resource="@array/preloaded_fonts" />
     </application>
 
+    <supports-screens android:resizeable="true"
+        android:smallScreens="true"
+        android:normalScreens="true"
+        android:largeScreens="true"
+        android:anyDensity="true"
+        tools:ignore="ManifestOrder" />
+
 </manifest>
