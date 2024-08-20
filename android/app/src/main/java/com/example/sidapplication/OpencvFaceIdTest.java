@@ -1,14 +1,39 @@
 package com.example.sidapplication;
 
-import android.graphics.Bitmap;
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
+
+import android.util.Log;
+
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
+
+import org.opencv.android.CameraActivity;
+import org.opencv.android.CameraBridgeViewBase;
+import org.opencv.core.Mat;
 
 import android.content.Intent;
 import org.opencv.android.CameraActivity;
 import org.opencv.android.CameraBridgeViewBase.CvCameraViewFrame;
 import org.opencv.android.OpenCVLoader;
-import org.opencv.android.Utils;
-import org.opencv.core.CvException;
 import org.opencv.core.Mat;
 import org.opencv.android.CameraBridgeViewBase;
 import org.opencv.android.CameraBridgeViewBase.CvCameraViewListener2;
@@ -18,7 +43,6 @@ import android.view.SurfaceView;
 import android.view.WindowManager;
 import android.widget.Toast;
 
-import java.io.ByteArrayOutputStream;
 import java.util.Collections;
 import java.util.List;
 
@@ -54,9 +78,7 @@ import android.view.MenuItem;
 import android.view.WindowManager;
 import android.widget.Toast;
 
-// 3초이상 유지하면 사진 캡쳐 => 액티비티 => 저장하기 or 다시하기.
-
-public class OpencvDetectionTest extends CameraActivity implements CvCameraViewListener2 {
+public class OpencvFaceIdTest extends CameraActivity implements CvCameraViewListener2 {
     private static final String TAG = "OCVSample::Activity";
 
     private static final Scalar    BOX_COLOR         = new Scalar(0, 255, 0);
@@ -189,17 +211,11 @@ public class OpencvDetectionTest extends CameraActivity implements CvCameraViewL
             Log.d(TAG, "Detected face (" + faceData[0] + ", " + faceData[1] + ", " +
                     faceData[2] + ", " + faceData[3] + ")");
 
-            // 사각형 그리기
-            Rect faceRect = new Rect(
-                    Math.round(mScale * faceData[0]),
-                    Math.round(mScale * faceData[1]),
-                    Math.round(mScale * faceData[2]),
-                    Math.round(mScale * faceData[3])
-            );
-
             // Draw bounding box
-            //Imgproc.rectangle(rgba, new Rect(Math.round(mScale*faceData[0]), Math.round(mScale*faceData[1]),Math.round(mScale*faceData[2]), Math.round(mScale*faceData[3])),BOX_COLOR, thickness);
-            Imgproc.rectangle(rgba, faceRect, BOX_COLOR, thickness);
+            Imgproc.rectangle(rgba, new Rect(Math.round(mScale*faceData[0]), Math.round(mScale*faceData[1]),
+                            Math.round(mScale*faceData[2]), Math.round(mScale*faceData[3])),
+                    BOX_COLOR, thickness);
+
 
             // Draw landmarks
             /*
@@ -242,30 +258,18 @@ public class OpencvDetectionTest extends CameraActivity implements CvCameraViewL
 
                 // 3초 동안 체크
                 if (System.currentTimeMillis() - startTime >= 3000) {
-                    //mOpenCvCameraView.disableView();
+                    int x = Math.round(mScale * faceData[0]);
+                    int y = Math.round(mScale * faceData[1]);
+                    int width = Math.round(mScale * faceData[2]);
+                    int height = Math.round(mScale * faceData[3]);
 
-                    // 얼굴 영역 잘라내기
-                    Mat faceROI = new Mat(rgba, faceRect);
+                    // 원본 이미지에서 얼굴 영역을 잘라내기
+                    Mat faceROI = new Mat(rgba, new Rect(x, y, width, height));
 
-                    // faceROI를 Bitmap으로 변환
-                    Bitmap faceBitmap = Bitmap.createBitmap(faceROI.cols(), faceROI.rows(), Bitmap.Config.ARGB_8888);
-                    org.opencv.android.Utils.matToBitmap(faceROI, faceBitmap);
-
-                    // Bitmap을 byte 배열로 변환 (Intent에 추가하기 위해)
-                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                    faceBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-                    byte[] faceBitmapData = stream.toByteArray();
-
-                    // Intent에 추가
-                    Intent intent = new Intent(OpencvDetectionTest.this, MainActivity.class);
-                    intent.putExtra("face_image", faceBitmapData);
-                    startActivity(intent);
-
-                    // Bitmap 메모리 해제
-                    faceBitmap.recycle();
-                    faceROI.release(); // Mat 객체 메모리 해제
-                    finish();
+                    mOpenCvCameraView.disableView();
+                    //처리(로티파일로 로딩)
                 }
+
             } else {
                 isFaceInFrame = false; // 얼굴이 프레임에서 벗어남
             }

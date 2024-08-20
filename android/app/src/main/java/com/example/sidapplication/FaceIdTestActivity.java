@@ -14,7 +14,7 @@ import androidx.camera.lifecycle.ProcessCameraProvider;
 import androidx.camera.view.PreviewView;
 import androidx.core.app.ActivityCompat;
 import java.util.concurrent.ExecutionException;
-
+//CameraX Test
 public class FaceIdTestActivity extends AppCompatActivity {
     PreviewView previewView;
     Button startButton;
