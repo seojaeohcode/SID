@@ -26,24 +26,6 @@
         android:theme="@style/Theme.SIDApplication"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
-            android:exported="false" />
-        <activity
-            android:name=".LoginActivity"
-            android:exported="false" />
-        <activity
-            android:name=".TestdbActivity"
-            android:exported="false" />
-        <activity
-            android:name=".FaceIdTestActivity"
-            android:exported="false" />
-        <activity
-            android:name=".FaceDetectFrameActivity"
-            android:exported="false" />
-        <activity
-            android:name=".OpencvDetectionTest"
-            android:exported="false" />
-        <activity
             android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
@@ -51,7 +33,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity
+            android:name=".LoginStartActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FaceIdActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CheckPhotoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

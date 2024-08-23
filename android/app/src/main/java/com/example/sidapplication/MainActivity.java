@@ -16,21 +16,10 @@ import android.graphics.Bitmap;
 import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-
-        // Intent에서 ByteArray 받기
-        byte[] faceBitmapData = getIntent().getByteArrayExtra("face_image");
-
-        if (faceBitmapData != null) {
-            // ByteArray를 Bitmap으로 변환
-            Bitmap faceBitmap = BitmapFactory.decodeByteArray(faceBitmapData, 0, faceBitmapData.length);
-
-            ImageView imageView = findViewById(R.id.imageView2);
-            imageView.setImageBitmap(faceBitmap); // Bitmap을 ImageView에 설정
-        }
     }
 }
