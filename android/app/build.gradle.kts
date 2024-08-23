@@ -71,6 +71,7 @@ dependencies {
     implementation(libs.activity)
     implementation(libs.constraintlayout)
     implementation(project(":opencv"))
+    implementation(libs.firebase.storage)
     //implementation(libs.opencv.android)
     //implementation(libs.camera.core)
     //implementation(libs.camera.lifecycle)
