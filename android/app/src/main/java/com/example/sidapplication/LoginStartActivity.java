@@ -1,10 +1,12 @@
 package com.example.sidapplication;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -60,7 +62,7 @@ public class LoginStartActivity extends AppCompatActivity {
         // [END initialize_auth]
 
         // Google Sign-In 버튼 클릭 이벤트 설정
-        Button googleSignInButton = findViewById(R.id.loginstart);
+        ImageButton googleSignInButton = findViewById(R.id.loginstart);
 
         googleSignInButton.setOnClickListener(new View.OnClickListener() {
             @Override

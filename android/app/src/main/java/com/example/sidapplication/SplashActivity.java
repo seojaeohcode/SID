@@ -44,7 +44,7 @@ public class SplashActivity extends AppCompatActivity {
             public void onAnimationEnd(Animation animation) {
                 // 애니메이션 종료 후 fade out 시작
                 //mLayout.startAnimation(fadeOutAnim);
-                Intent intent = new Intent(SplashActivity.this, LoginStartActivity.class);
+                Intent intent = new Intent(SplashActivity.this, Splash2Activity.class);
                 startActivity(intent);
                 finish(); // 현재 액티비티 종료
             }
