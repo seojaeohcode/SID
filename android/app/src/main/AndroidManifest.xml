@@ -34,6 +34,9 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".Splash2Activity"
+            android:exported="false" />
+        <activity
             android:name=".LoginStartActivity"
             android:exported="false" />
         <activity
