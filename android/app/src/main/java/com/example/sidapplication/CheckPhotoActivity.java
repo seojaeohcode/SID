@@ -6,11 +6,11 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.net.Uri;
 import android.util.Log;
 import androidx.annotation.NonNull;
 
@@ -21,7 +21,6 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.util.HashMap;
 
 public class CheckPhotoActivity extends AppCompatActivity {
@@ -46,9 +45,9 @@ public class CheckPhotoActivity extends AppCompatActivity {
             sendBit = faceBitmap;
         }
 
-        Button photook = findViewById(R.id.photook);
+        ImageButton save = findViewById(R.id.save);
 
-        photook.setOnClickListener(new View.OnClickListener() {
+        save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ImageUpload(sendBit);
