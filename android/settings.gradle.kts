@@ -21,4 +21,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "SID Application"
 include(":app")
+include(":opencv")
  
