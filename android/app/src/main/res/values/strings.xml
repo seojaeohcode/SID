@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">SID Application</string>
     <string name="default_web_client_id">204145570781-86nj3m9ncnnste70bevbqngc7jt6p1ck.apps.googleusercontent.com</string>
+    <string name="GPTKey">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</string>
 </resources>
