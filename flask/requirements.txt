@@ -1,0 +1,16 @@
+dataclasses
+gpu-info
+joblib
+numpy
+onnxruntime-gpu
+Pillow
+protobuf
+psutil
+pygobject
+scikit-learn
+scipy
+six
+threadpoolctl
+torch
+torchvision
+typing-extensions
