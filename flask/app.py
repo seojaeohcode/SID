@@ -3,11 +3,11 @@ import os
 import numpy as np
 import onnxruntime as ort
 from PIL import Image
+import cv2
 
 app = Flask(__name__)
 
 
-# NIADermaDataset 클래스 (이전 코드와 동일)
 class NIADermaDataset(object):
     def __init__(self, root, transforms=None):
         self.root = root
@@ -37,13 +37,23 @@ def load_model(model_path):
     return model
 
 
-# 예측 함수
 def predict(model, img):
-    img = np.array(img).astype(np.float32)
-    img = img.transpose(2, 0, 1)  # HWC to CHW
-    img = np.expand_dims(img, axis=0)  # Add batch dimension
+    # 이미지 전처리
+    img = np.array(img)  # 이미지를 NumPy 배열로 변환
+    img = cv2.resize(img, (256, 256))  # 이미지 크기 조정 (256x256)
+    img = img.astype(np.float32) / 255.0  # [0, 255]에서 [0, 1]로 변환
 
-    outputs = model.run(None, {model.get_inputs()[0].name: img})
+    # 정규화
+    mean = np.array([0.485, 0.456, 0.406], dtype=np.float32)  # 평균값
+    std = np.array([0.229, 0.224, 0.225], dtype=np.float32)  # 표준편차
+    img = (img - mean) / std  # 정규화
+
+    img = img.transpose(2, 0, 1)  # HWC에서 CHW로 변환
+    img = np.expand_dims(img, axis=0)  # 배치 차원 추가
+
+    ort_inputs = {model.get_inputs()[0].name: img}
+    outputs = model.run(None, ort_inputs)
+
     return outputs
 
 
