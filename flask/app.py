@@ -1,78 +1,78 @@
-import os
-import torch
-import onnxruntime
-from torchvision import transforms
-from PIL import Image
-import numpy as np
+# import os
+# import torch
+# import onnxruntime
+# from torchvision import transforms
+# from PIL import Image
+# import numpy as np
 
-# 이미지 변환 설정 (이미지 비율을 1:1로 강제 조정)
-normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406],
-                                 std=[0.229, 0.224, 0.225])
+# # 이미지 변환 설정 (이미지 비율을 1:1로 강제 조정)
+# normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406],
+#                                  std=[0.229, 0.224, 0.225])
 
-# 비율을 유지하지 않고 1:1로 크기를 조정
-transform = transforms.Compose([
-    transforms.Resize((256, 256)),  # 256x256으로 강제로 크기 조정 (비율을 유지하지 않음)
-    transforms.ToTensor(),
-    normalize,
-])
+# # 비율을 유지하지 않고 1:1로 크기를 조정
+# transform = transforms.Compose([
+#     transforms.Resize((256, 256)),  # 256x256으로 강제로 크기 조정 (비율을 유지하지 않음)
+#     transforms.ToTensor(),
+#     normalize,
+# ])
 
-# 모델을 로드합니다.
-model_path = f"NIADerma_4cls.onnx"
-ort_session = onnxruntime.InferenceSession(model_path)
+# # 모델을 로드합니다.
+# model_path = f"NIADerma_4cls.onnx"
+# ort_session = onnxruntime.InferenceSession(model_path)
 
-def to_numpy(tensor):
-    return tensor.detach().cpu().numpy() if tensor.requires_grad else tensor.cpu().numpy()
+# def to_numpy(tensor):
+#     return tensor.detach().cpu().numpy() if tensor.requires_grad else tensor.cpu().numpy()
 
-def predict_image(image_path):
-    # 이미지 로드 및 전처리
-    img = Image.open(image_path).convert("RGB")
-    img = transform(img).unsqueeze(0)  # 배치 차원을 추가합니다.
+# def predict_image(image_path):
+#     # 이미지 로드 및 전처리
+#     img = Image.open(image_path).convert("RGB")
+#     img = transform(img).unsqueeze(0)  # 배치 차원을 추가합니다.
 
-    # ONNX 모델에 입력할 수 있도록 NumPy 배열로 변환합니다.
-    ort_inputs = {ort_session.get_inputs()[0].name: to_numpy(img)}
+#     # ONNX 모델에 입력할 수 있도록 NumPy 배열로 변환합니다.
+#     ort_inputs = {ort_session.get_inputs()[0].name: to_numpy(img)}
     
-    # 모델 예측 수행
-    ort_outs = ort_session.run(None, ort_inputs)
-    output = torch.tensor(ort_outs[0])
+#     # 모델 예측 수행
+#     ort_outs = ort_session.run(None, ort_inputs)
+#     output = torch.tensor(ort_outs[0])
     
-    # 예측 결과의 확률로 변환
-    probabilities = torch.nn.Softmax(dim=1)(output)
+#     # 예측 결과의 확률로 변환
+#     probabilities = torch.nn.Softmax(dim=1)(output)
     
-    # 가장 높은 확률의 인덱스를 가져와 클래스 예측을 수행
-    predicted_class = torch.argmax(probabilities, dim=1).item()
+#     # 가장 높은 확률의 인덱스를 가져와 클래스 예측을 수행
+#     predicted_class = torch.argmax(probabilities, dim=1).item()
     
-    return predicted_class, probabilities
+#     return predicted_class, probabilities
 
-# 이미지 데이터 경로 및 규칙 설정
-base_path = "C:\\Users\\HB\\Downloads\\TS\\1. 디지털카메라\\"
-start_index = 1
-end_index = 1100  # 데이터의 마지막 인덱스 설정
+# # 이미지 데이터 경로 및 규칙 설정
+# base_path = "C:\\Users\\HB\\Downloads\\TS\\1. 디지털카메라\\"
+# start_index = 1
+# end_index = 1100  # 데이터의 마지막 인덱스 설정
 
-results = {}
+# results = {}
 
-# 각 폴더 및 이미지 파일에 대해 반복
-for idx in range(start_index, end_index + 1):
-    folder_name = f"{idx:04d}"
-    image_path = f"{base_path}{folder_name}\\{folder_name}_01_F.jpg"
+# # 각 폴더 및 이미지 파일에 대해 반복
+# for idx in range(start_index, end_index + 1):
+#     folder_name = f"{idx:04d}"
+#     image_path = f"{base_path}{folder_name}\\{folder_name}_01_F.jpg"
 
-    # 해당 폴더와 이미지 파일이 존재하는지 확인
-    if os.path.exists(image_path):
-        try:
-            predicted_class, probabilities = predict_image(image_path)
-            results[image_path] = {
-                'predicted_class': predicted_class,
-                'probabilities': probabilities.tolist()  # 확률 값들을 리스트 형식으로 저장
-            }
-        except Exception as e:
-            print(f"Error processing image {image_path}: {e}")
-    else:
-        print(f"Image or folder not found: {image_path}")
+#     # 해당 폴더와 이미지 파일이 존재하는지 확인
+#     if os.path.exists(image_path):
+#         try:
+#             predicted_class, probabilities = predict_image(image_path)
+#             results[image_path] = {
+#                 'predicted_class': predicted_class,
+#                 'probabilities': probabilities.tolist()  # 확률 값들을 리스트 형식으로 저장
+#             }
+#         except Exception as e:
+#             print(f"Error processing image {image_path}: {e}")
+#     else:
+#         print(f"Image or folder not found: {image_path}")
 
-# 결과 출력
-for image_path, result in results.items():
-    print(f"Image: {image_path}")
-    print(f"Predicted Class: {result['predicted_class']}")
-    print(f"Probabilities: {result['probabilities']}\n")
+# # 결과 출력
+# for image_path, result in results.items():
+#     print(f"Image: {image_path}")
+#     print(f"Predicted Class: {result['predicted_class']}")
+#     print(f"Probabilities: {result['probabilities']}\n")
 
 
 
