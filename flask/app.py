@@ -1,9 +1,98 @@
-# import os
-# import torch
-# import onnxruntime
-# from torchvision import transforms
-# from PIL import Image
-# import numpy as np
+from flask import Flask, request, jsonify
+import os
+import numpy as np
+import onnxruntime as ort
+from PIL import Image
+import cv2
+import torch
+from torchvision import transforms
+
+app = Flask(__name__)
+
+# 이미지 변환 설정
+normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+
+transform = transforms.Compose(
+    [
+        transforms.Resize((256, 256)),
+        transforms.ToTensor(),
+        normalize,
+    ]
+)
+
+# 모델 로드
+model_path = r"D:\SID2\flask\NIADerma_33cls.onnx"
+ort_session = ort.InferenceSession(model_path)
+
+
+def to_numpy(tensor):
+    return (
+        tensor.detach().cpu().numpy() if tensor.requires_grad else tensor.cpu().numpy()
+    )
+
+
+def predict_image(image):
+    # 이미지 전처리
+    img = Image.open(image).convert("RGB")
+    img = transform(img).unsqueeze(0)
+
+    # ONNX 모델에 입력 준비
+    ort_inputs = {ort_session.get_inputs()[0].name: to_numpy(img)}
+
+    # 예측 수행
+    ort_outs = ort_session.run(None, ort_inputs)
+    output = torch.tensor(ort_outs[0])
+
+    # 확률로 변환
+    probabilities = torch.nn.Softmax(dim=1)(output)
+
+    # 가장 높은 확률의 클래스 예측
+    predicted_class = torch.argmax(probabilities, dim=1).item()
+
+    return predicted_class, probabilities
+
+
+@app.route("/")
+def hello():
+    return "Hello World!"
+
+
+@app.route("/diagnosis", methods=["POST"])
+def diagnosis():
+    if "file" not in request.files:
+        return jsonify({"error": "No file part"}), 400
+
+    file = request.files["file"]
+
+    if file.filename == "":
+        return jsonify({"error": "No selected file"}), 400
+
+    try:
+        # 이미지 파일을 임시로 저장
+        image_path = "temp_image.jpg"
+        file.save(image_path)
+
+        # 예측 수행
+        predicted_class, probabilities = predict_image(image_path)
+
+        # 결과 반환
+        result = {
+            "predicted_class": predicted_class,
+            "probabilities": probabilities.tolist(),
+        }
+
+        # 임시 파일 삭제
+        os.remove(image_path)
+
+        return jsonify(result)
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+if __name__ == "__main__":
+    app.run()
+
 
 # # 이미지 변환 설정 (이미지 비율을 1:1로 강제 조정)
 # normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406],
@@ -30,17 +119,17 @@
 
 #     # ONNX 모델에 입력할 수 있도록 NumPy 배열로 변환합니다.
 #     ort_inputs = {ort_session.get_inputs()[0].name: to_numpy(img)}
-    
+
 #     # 모델 예측 수행
 #     ort_outs = ort_session.run(None, ort_inputs)
 #     output = torch.tensor(ort_outs[0])
-    
+
 #     # 예측 결과의 확률로 변환
 #     probabilities = torch.nn.Softmax(dim=1)(output)
-    
+
 #     # 가장 높은 확률의 인덱스를 가져와 클래스 예측을 수행
 #     predicted_class = torch.argmax(probabilities, dim=1).item()
-    
+
 #     return predicted_class, probabilities
 
 # # 이미지 데이터 경로 및 규칙 설정
@@ -73,9 +162,6 @@
 #     print(f"Image: {image_path}")
 #     print(f"Predicted Class: {result['predicted_class']}")
 #     print(f"Probabilities: {result['probabilities']}\n")
-
-
-
 
 # from flask import Flask, request, jsonify
 # import os
