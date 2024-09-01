@@ -21,7 +21,7 @@ public class Splash2Activity extends AppCompatActivity  {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(Splash2Activity.this, DiagnosisCameraActivity.class);
+                Intent intent = new Intent(Splash2Activity.this, LoginStartActivity.class);
                 startActivity(intent);
                 finish(); // 현재 액티비티 종료
             }
