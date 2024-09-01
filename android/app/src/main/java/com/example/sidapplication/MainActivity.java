@@ -1,5 +1,6 @@
 package com.example.sidapplication;
 
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +14,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import android.graphics.Bitmap;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
@@ -21,5 +23,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
+        ImageButton DiagnosisStartButton = findViewById(R.id.DiagnosisButton);
+
+        DiagnosisStartButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, DiagnosisCameraActivity.class);
+                startActivity(intent);
+                finish(); // 현재 액티비티 종료
+            }
+        });
     }
 }
