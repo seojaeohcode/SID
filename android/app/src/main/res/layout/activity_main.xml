@@ -24,7 +24,7 @@
         app:layout_constraintVertical_bias="0.214" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/DiagnosisButton"
         android:layout_width="319dp"
         android:layout_height="87dp"
         android:background="@android:color/transparent"
@@ -45,8 +45,8 @@
 
     <ImageView
         android:id="@+id/imageView4"
-        android:layout_width="250dp"
-        android:layout_height="331dp"
+        android:layout_width="255dp"
+        android:layout_height="202dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

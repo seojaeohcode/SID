@@ -4,7 +4,7 @@
 
     <uses-feature
         android:name="android.hardware.camera"
-        android:required="false" />
+        android:required="true" />
     <uses-feature android:name="android.hardware.camera.any"/>
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
@@ -47,6 +47,12 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DiagnosisCameraActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CheckDiagnosisPhotoActivity"
             android:exported="false" />
         <activity
             android:name=".GptReportActivity"

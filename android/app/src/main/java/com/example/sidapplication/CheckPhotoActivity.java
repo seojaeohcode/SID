@@ -54,6 +54,7 @@ public class CheckPhotoActivity extends AppCompatActivity {
             }
         });
     }
+
     private void ImageUpload(Bitmap faceBitmap) {
         // Firebase Storage 인스턴스 가져오기
         FirebaseStorage storage = FirebaseStorage.getInstance();
