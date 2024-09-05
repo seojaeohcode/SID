@@ -62,7 +62,7 @@ def gpt():
     client = OpenAI(api_key=API_KEY)
     thread = client.beta.threads.create()
     thread_id = thread.id
-    assistant_id = "asst_LyBLHKgpTP6SrdhZmfwD5DpB"
+    assistant_id = "asst_Xt8ks7fEyYcvbz7bbD7BBIoj"
 
     message = client.beta.threads.messages.create(
         thread_id=thread_id, role="user", content="병명은 아토피이고 중증도는 2입니다."
