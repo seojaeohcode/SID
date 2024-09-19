@@ -2,13 +2,11 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/captureview"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
     <ImageView
-        android:id="@+id/cvcapture"
+        android:id="@+id/diagnosisphotopreview"
         android:layout_width="match_parent"
         android:layout_height="540dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -24,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/gowun_batang"
-        android:text="사진을 갱신합니다"
+        android:text="진단 AI에게 전송"
         android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -51,4 +49,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.929"
         app:srcCompat="@drawable/save" />
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

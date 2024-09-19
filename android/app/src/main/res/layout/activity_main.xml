@@ -45,7 +45,11 @@
 
     <ImageView
         android:id="@+id/imageView4"
+<<<<<<< HEAD
         android:layout_width="255dp"
+=======
+        android:layout_width="247dp"
+>>>>>>> 972c3405a8efe59f8de52140939afd25a9973e23
         android:layout_height="202dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

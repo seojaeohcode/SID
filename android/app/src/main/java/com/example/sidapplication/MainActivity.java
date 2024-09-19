@@ -23,8 +23,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
+<<<<<<< HEAD
 
         // Google Sign-In 버튼 클릭 이벤트 설정
+=======
+>>>>>>> 972c3405a8efe59f8de52140939afd25a9973e23
         ImageButton DiagnosisStartButton = findViewById(R.id.DiagnosisButton);
 
         DiagnosisStartButton.setOnClickListener(new View.OnClickListener() {

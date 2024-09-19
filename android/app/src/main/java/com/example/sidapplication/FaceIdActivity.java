@@ -97,7 +97,18 @@ public class FaceIdActivity extends CameraActivity implements CvCameraViewListen
             Log.i(TAG, "OpenCV loaded successfully");
         } else {
             Log.e(TAG, "OpenCV initialization failed!");
-            (Toast.makeText(this, "OpenCV initialization failed!", Toast.LENGTH_LONG)).show();
+
+            // 추가적인 오류 로그 출력
+            try {
+                // OpenCV 라이브러리 경로 확인
+                String opencvLibraryPath = getApplicationInfo().nativeLibraryDir;
+                Log.e(TAG, "OpenCV Library Path: " + opencvLibraryPath);
+            } catch (Exception e) {
+                Log.e(TAG, "Error retrieving OpenCV library path: " + e.getMessage());
+            }
+
+            // Toast 메시지 출력
+            Toast.makeText(this, "OpenCV initialization failed!", Toast.LENGTH_LONG).show();
             return;
         }
 

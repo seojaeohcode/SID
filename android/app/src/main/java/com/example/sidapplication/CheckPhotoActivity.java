@@ -5,7 +5,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
@@ -45,7 +44,7 @@ public class CheckPhotoActivity extends AppCompatActivity {
             sendBit = faceBitmap;
         }
 
-        ImageButton save = findViewById(R.id.save);
+        ImageButton save = findViewById(R.id.sendimg);
 
         save.setOnClickListener(new View.OnClickListener() {
             @Override
