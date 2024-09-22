@@ -8,7 +8,9 @@ Make SID APP and Analyze Data
 # Demonstrate
 ---
 <div align="center">
-  <video width="300" height="600" controls>
-    <source src="https://github.com/user-attachments/assets/31f7c9ef-9772-4822-a9eb-67a987ef9255" type="video/mp4">
-  </video>
+  
+
+https://github.com/user-attachments/assets/05c7fbd3-1af2-413b-97e4-fe3f1b764387
+
+
 </div>
