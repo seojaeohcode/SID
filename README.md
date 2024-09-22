@@ -10,7 +10,7 @@ Make SID APP and Analyze Data
 <div align="center">
   
 
-https://github.com/user-attachments/assets/05c7fbd3-1af2-413b-97e4-fe3f1b764387
+https://github.com/user-attachments/assets/d7477ff5-233d-465a-b06e-1e5ceb5489fb
 
 
 </div>
