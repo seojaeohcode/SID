@@ -1,9 +1,6 @@
-TEAM NOTT
-<br>
-Skin Image Diagnosis Project
-<br>
-Make SID APP and Analyze Data
-<br>
+# Skin Image Diagnosis
+> **Team NOTT(전남대학교 인공지능학부 서재오,임한빈,최재원)** <br/> **개발기간: 2024.06 ~ 2024.09**
+
 
 # Demonstrate
 ---
