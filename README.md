@@ -30,6 +30,11 @@ AI 진단 시스템: 피부질환 이미지와 데이터의 라벨링을 통해 
 ## App Flow
 ![flow](https://github.com/user-attachments/assets/8dc7e680-c262-42ea-b47e-49e3c9cd4fc4)
 
+## 사용 데이터 (AI-Hub)
+![image](https://github.com/user-attachments/assets/4c00fc7a-55c8-4d49-85b8-a59909ebb449)
+![image](https://github.com/user-attachments/assets/950e3890-75b9-49ba-b693-fdc83ae6c46c)
+![image](https://github.com/user-attachments/assets/f5dd8f3b-e1bc-4162-98af-27f977da0ca5)
+
 ## SID 개발팀 소개 (앱개발 + 인공지능)
 
 |      서재오       |          임한빈          |       최재원         |                                                                                                               
