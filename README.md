@@ -11,7 +11,7 @@ https://github.com/user-attachments/assets/d7477ff5-233d-465a-b06e-1e5ceb5489fb
 </div>
 
 ## 사용기술
-![20241107_154432](https://github.com/user-attachments/assets/f7d5579a-d341-47d4-951b-6b0d031a679f)
+![20241107_193848](https://github.com/user-attachments/assets/93f3ac49-15da-41bf-8df4-e9dbd1cfab1f)
 
 ## 프로젝트 소개
 AI 기반 소아청소년 특화 피부질환 1차 진단 시스템 'SKINNOTT'는 피부질환 이미지와 피부 상태 데이터를 활용해 진단 정확성을 향상시키고, 건강보험 재정 고갈 문제와 관련된 의료비 부담을 완화하고자 합니다. 주요 목표는 소아청소년에게 접근이 용이한 피부과 진단 서비스를 제공하여, 진단 과정의 효율성을 높이고 의료 서비스의 접근성을 개선하는 것입니다.
