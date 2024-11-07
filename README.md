@@ -33,7 +33,7 @@ AI 기반 소아청소년 특화 피부질환 1차 진단 시스템 'SKINNOTT'�
 ![flow](https://github.com/user-attachments/assets/8dc7e680-c262-42ea-b47e-49e3c9cd4fc4)
 
 ## 사용 데이터 (AI-Hub)
-![image](https://github.com/user-attachments/assets/fa6b382c-8e6e-4c69-a32b-29e9e9b705c5)
+![image](https://github.com/user-attachments/assets/93bcd807-54bd-4c46-a4a6-f574601f8ace)
 
 ## 데이터 시각화 일부
 1. 피부질환-증상 관계 시각화 (인코딩 문제로 인한 텍스트 출력 오류 있음)
