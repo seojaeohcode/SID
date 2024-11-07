@@ -34,15 +34,15 @@ AI 진단 시스템: 피부질환 이미지와 데이터의 라벨링을 통해 
 ![image](https://github.com/user-attachments/assets/fa6b382c-8e6e-4c69-a32b-29e9e9b705c5)
 
 ## 데이터 시각화 일부
-![image](https://github.com/user-attachments/assets/48457cdd-8446-4c5e-b4b9-80fb891fe52c)
 1. 피부질환-증상 관계 시각화 (인코딩 문제로 인한 텍스트 출력 오류 있음)
   - 사용 데이터: 소아청소년 피부질환 이미지 데이터
----
+![image](https://github.com/user-attachments/assets/48457cdd-8446-4c5e-b4b9-80fb891fe52c)
+
+2. 피부상태 데이터 시각화 
+  - 사용 데이터: 피부상태 측정 데이터
 ![image](https://github.com/user-attachments/assets/05150a5a-b9da-40e4-a693-367b838718f5)
 ![image](https://github.com/user-attachments/assets/87b6d49c-936f-4e5a-b4bc-a90a52cebef4)
 ![image](https://github.com/user-attachments/assets/b0fc19c6-dee7-4d5f-88ea-b1b474ba6d63)
-2. 피부상태 데이터 시각화 
-  - 사용 데이터: 피부상태 측정 데이터
 
 ## SID 개발팀 소개 (앱개발 + 인공지능)
 
