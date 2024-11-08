@@ -1,3 +1,4 @@
+# 🏆 첨단분야 혁신융합대학사업 협의회장상 수상
 # Skin Image Diagnosis
 > **Team NOTT** <br/> **개발기간: 2024.06 ~ 2024.09** <br/> **특이사항: IRB 심의 승인 및 종료**
 # Demonstrate
